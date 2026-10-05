@@ -1,0 +1,13 @@
+{
+  "name": "vistaar-content-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vistaar Content — wedding and event photography & films website",
+  "scripts": {
+    "dev": "npx --yes serve . -l 3000",
+    "start": "npx --yes serve . -l 3000",
+    "check": "node tools/check-config.mjs"
+  },
+  "keywords": ["photography", "wedding", "films", "static-site"],
+  "license": "UNLICENSED"
+}
