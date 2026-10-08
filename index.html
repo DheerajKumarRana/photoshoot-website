@@ -47,7 +47,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v=2026-10-08f">
 
 <!-- Structured data: helps Google show you as a local photography business -->
 <script type="application/ld+json">
@@ -237,6 +237,9 @@
             </div>
             <p class="work-intro" id="mxIntro"></p>
             <div class="chips" id="chips" aria-label="Filter"></div>
+            <a class="btn btn-gold mx-more" id="mxMore" href="category.html" hidden>See more
+              <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true"><path d="M3 9 9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -298,6 +301,25 @@
       </form>
     </div>
   </section>
+
+  <!-- GALLERY: polaroid-line-carousel -->
+  <section class="gallery" id="gallery" data-tone="light" aria-labelledby="plHead">
+    <div class="pl-head">
+      <h2 id="plHead">Fresh from the darkroom</h2>
+      <p>A few favourite frames, pegged up to dry. Drag the line, use the arrows, or tap a print.</p>
+    </div>
+    <div class="pl-root" id="plRoot" role="region" aria-roledescription="carousel" aria-label="Favourite photographs" tabindex="0">
+      <svg class="pl-string" aria-hidden="true"><path id="plPath" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div id="plCards"></div>
+      <div class="pl-bar">
+        <div class="pl-cap" id="plCap" aria-hidden="true"></div>
+        <span class="pl-count" id="plCount" aria-hidden="true"></span>
+        <button type="button" class="pl-btn" id="plPrev" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        <button type="button" class="pl-btn" id="plNext" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
+      </div>
+      <div class="sr-only" id="plLive" aria-live="polite"></div>
+    </div>
+  </section>
 </main>
 
 <footer class="foot" id="foot" data-tone="light">
@@ -342,7 +364,8 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="js/content.js" defer></script>
-<script src="js/app.js" defer></script>
+<script src="js/content.js?v=2026-10-08f" defer></script>
+<script src="js/common.js?v=2026-10-08f" defer></script>
+<script src="js/app.js?v=2026-10-08f" defer></script>
 </body>
 </html>
