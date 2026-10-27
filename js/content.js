@@ -27,7 +27,8 @@ const CONFIG = {
 };
 
 // Unsplash photo IDs (free under the Unsplash License). Swap for your own shoots.
-const US=(id,w,h)=>id?`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}${h?`&h=${h}`:""}&q=72`:"";
+// A full URL or a path (an uploaded photo from the CMS, assets/...) is used as it is.
+const US=(id,w,h)=>!id?"":/^(https?:)?\/\/|^[\w-]+\//.test(id)?id:`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}${h?`&h=${h}`:""}&q=72`;
 
 const CATS = [
   { id:"weddings", title:"Weddings", short:"Weddings", img:"photo-1587271636175-90d58cdad458",
@@ -291,3 +292,14 @@ const GALLERY = [
   { cat:"weddings", title:"Newlyweds", caption:"The first portrait as a married couple.", src:"", img:"photo-1743684821666-05b9c5046937" }
 ];
 
+// The four "how a shoot works" steps in About, each paired with a print above.
+const STEPS = [
+  ["We talk","Tell us the occasion, the date and who absolutely has to be in the photos."],
+  ["We plan","We map the rituals and timings with you, and with your planner if you have one."],
+  ["We shoot","Photos and film side by side, without staging every moment."],
+  ["You get the edit","Your photographs and films, ready to share with family and to keep."]
+];
+
+// Page text edited in the CMS, keyed like the data-cms attributes in the HTML.
+// Filled by js/cms.js; empty means the text written in the HTML is kept.
+const TEXTS = {};

@@ -1,6 +1,7 @@
 # Vistaar Content — robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin
 
 # TODO: replace with your real domain
 Sitemap: https://www.vistaarcontent.com/sitemap.xml

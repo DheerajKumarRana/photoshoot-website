@@ -192,12 +192,6 @@ function initWheel(){
    component; a step and the photo before it stay in focus together.
    On first view the items deal in one after another, in reading order.
    ===================================================================== */
-const STEPS=[
-  ["We talk","Tell us the occasion, the date and who absolutely has to be in the photos."],
-  ["We plan","We map the rituals and timings with you, and with your planner if you have one."],
-  ["We shoot","Photos and film side by side, without staging every moment."],
-  ["You get the edit","Your photographs and films, ready to share with family and to keep."]
-];
 function initAbout(){
   const sec=$("#about"),ig=$("#ig"),coarse=matchMedia("(hover: none)").matches;
   let n=0;
@@ -257,8 +251,8 @@ function initRecent(){
     photo:[{id:"all",label:"All",n:PHOTOS.length},...CATS.filter(c=>counts[c.id]).map(c=>({id:c.id,label:c.short,n:counts[c.id]}))],
     film:[{id:"all",label:"All",n:FILM_LIST.length},{id:"hl",label:"Event highlights",n:FILMS.highlights.length},{id:"rl",label:"Reels",n:FILMS.reels.length}]
   };
-  const INTRO={photo:"Stills from recent shoots across every occasion we cover. Pick a category, or open any photo to see it full screen.",
-               film:"Event highlights to watch with the family, and short reels cut for Instagram and WhatsApp. Open any film to play it."};
+  const INTRO={photo:TEXTS["recent.introPhoto"]||"Stills from recent shoots across every occasion we cover. Pick a category, or open any photo to see it full screen.",
+               film:TEXTS["recent.introFilm"]||"Event highlights to watch with the family, and short reels cut for Instagram and WhatsApp. Open any film to play it."};
   let mode="photo",filter="all",list=[];
   const cols=[0,1,2,3].map(()=>{const c=document.createElement("div");c.className="mx-col";grid.appendChild(c);return c});
 
@@ -419,6 +413,8 @@ function initForm(){
     const lines=[`Hi Vistaar Content, I'm ${d.name.trim()}.`,
       d.type?`I'd like to book a shoot for: ${d.type}.`:"I'd like to book a shoot.",
       date&&`Date: ${date}`, d.city&&`City and venue: ${d.city}`, d.msg&&`Notes: ${d.msg}`, `Phone: ${d.phone}`].filter(Boolean);
+    CMS.enquire({name:d.name.trim().slice(0,120),phone:d.phone.trim().slice(0,30),occasion:(d.type||"").slice(0,80)||null,
+      event_date:d.date||null,city:(d.city||"").trim().slice(0,160)||null,message:(d.msg||"").trim().slice(0,2000)||null});
     const a=document.createElement("a");a.href=`https://wa.me/${num}?text=${encodeURIComponent(lines.join("\n"))}`;a.target="_blank";a.rel="noopener";
     document.body.appendChild(a);a.click();a.remove();
     status.textContent="WhatsApp opened in a new tab with your details filled in. Press send there to reach us.";

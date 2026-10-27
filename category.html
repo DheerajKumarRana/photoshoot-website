@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=2026-10-08f">
+<link rel="stylesheet" href="css/styles.css?v=2026-10-27a">
 </head>
 <body class="cat-page">
 <a class="skip" href="#main">Skip to content</a>
@@ -72,7 +72,7 @@
         Films <span id="cpNFilm"></span>
       </button>
     </div>
-    <p class="cp-note" id="cpNote" hidden>Films from this occasion are still in the edit. Here are a few recent ones meanwhile.</p>
+    <p class="cp-note" id="cpNote" hidden data-cms="category.filmNote">Films from this occasion are still in the edit. Here are a few recent ones meanwhile.</p>
 
     <div class="cp-scroll" id="cpScroll">
       <div class="cp-sticky">
@@ -85,8 +85,8 @@
   <section class="cp-more" data-tone="light" aria-labelledby="cpMoreHead">
     <div class="cp-more-in">
       <div class="fl-head">
-        <h2 id="cpMoreHead">More occasions we shoot</h2>
-        <p>Planning something else? Every family occasion gets the same care.</p>
+        <h2 id="cpMoreHead" data-cms="category.moreTitle">More occasions we shoot</h2>
+        <p data-cms="category.moreText">Planning something else? Every family occasion gets the same care.</p>
       </div>
       <ul class="cp-cats" id="cpCats"></ul>
     </div>
@@ -98,7 +98,7 @@
     <div class="foot-grid">
       <div>
         <a class="brand" href="index.html">Vistaar Content</a>
-        <p class="foot-tag">Photography and films for weddings, traditional ceremonies and family occasions.</p>
+        <p class="foot-tag" data-cms="footer.tag">Photography and films for weddings, traditional ceremonies and family occasions.</p>
         <a class="btn btn-solid foot-cta" href="index.html#enquire">Check your date</a>
       </div>
       <nav class="foot-cols" aria-label="Footer">
@@ -109,7 +109,7 @@
     </div>
     <div class="foot-base">
       <span>© <span id="yr"></span> Vistaar Content</span>
-      <span class="foot-dot"><i></i>Weddings, ceremonies and family occasions</span>
+      <span class="foot-dot"><i></i><span data-cms="footer.strip">Weddings, ceremonies and family occasions</span></span>
       <a href="#top" id="toTop">Back to top</a>
     </div>
   </div>
@@ -130,8 +130,8 @@
   <div class="dlg-cap" id="fbCap"></div>
 </dialog>
 
-<script src="js/content.js?v=2026-10-08f" defer></script>
-<script src="js/common.js?v=2026-10-08f" defer></script>
-<script src="js/category.js?v=2026-10-08f" defer></script>
+<script src="js/content.js?v=2026-10-27a" defer></script>
+<script src="js/cms-config.js?v=2026-10-27a" defer></script>
+<script src="js/cms.js?v=2026-10-27a" data-next="js/common.js?v=2026-10-27a js/category.js?v=2026-10-27a" defer></script>
 </body>
 </html>

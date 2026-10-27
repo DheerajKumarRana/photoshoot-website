@@ -480,3 +480,6 @@ main{position:relative;z-index:1}
 @media (prefers-reduced-motion: reduce){
   *{transition-duration:.01ms !important;animation-duration:.01ms !important;scroll-behavior:auto !important}
 }
+
+/* CMS: page text waits for the live copy so it never flashes the old wording. */
+.cms-wait [data-cms]{visibility:hidden}

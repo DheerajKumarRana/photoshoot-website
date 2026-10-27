@@ -47,7 +47,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="css/styles.css?v=2026-10-08f">
+<link rel="stylesheet" href="css/styles.css?v=2026-10-27a">
 
 <!-- Structured data: helps Google show you as a local photography business -->
 <script type="application/ld+json">
@@ -117,12 +117,12 @@
     <div class="hero-sticky">
       <div class="hero-stage" id="heroStage">
         <div class="hero-intro" id="heroIntro" aria-hidden="true">
-          <p class="hero-intro-line">Every ceremony, kept close.</p>
-          <p class="hero-intro-cue">Scroll to open the album</p>
+          <p class="hero-intro-line" data-cms="hero.intro">Every ceremony, kept close.</p>
+          <p class="hero-intro-cue" data-cms="hero.cue">Scroll to open the album</p>
         </div>
         <div class="hero-content" id="heroContent">
-          <h1>Photographs and films of the days your family will keep retelling.</h1>
-          <p>Weddings, poojas, first birthdays, housewarmings and everything in between, photographed and filmed by Vistaar Content.</p>
+          <h1 data-cms="hero.title">Photographs and films of the days your family will keep retelling.</h1>
+          <p data-cms="hero.text">Weddings, poojas, first birthdays, housewarmings and everything in between, photographed and filmed by Vistaar Content.</p>
           <div class="hero-ctas">
             <a class="btn btn-solid" href="#enquire">Check your date</a>
             <a class="btn btn-ghost" href="#portfolio">Browse the portfolio</a>
@@ -138,7 +138,7 @@
     <h2 class="sr-only" id="mfTitle">Every moment, framed and filmed</h2>
     <div class="mf-rows">
       <div class="mf-row">
-        <p class="mf-note r">Vistaar Content photographs and films weddings, ceremonies and family occasions.</p>
+        <p class="mf-note r" data-cms="manifesto.note1">Vistaar Content photographs and films weddings, ceremonies and family occasions.</p>
         <p class="mf-word" aria-hidden="true">EVERY</p>
       </div>
       <div class="mf-row r2">
@@ -147,7 +147,7 @@
             <circle cx="50" cy="50" r="46"/>
             <path d="M50 4 L73 62"/><path d="M89.8 27 L38.5 62"/><path d="M89.8 73 L27 50"/><path d="M50 96 L27 38"/><path d="M10.2 73 L61.5 38"/><path d="M10.2 27 L73 50"/>
           </svg><span>MENT</span></p>
-        <p class="mf-note dn">Big weddings, small poojas, and every occasion your family celebrates in between.</p>
+        <p class="mf-note dn" data-cms="manifesto.note2">Big weddings, small poojas, and every occasion your family celebrates in between.</p>
       </div>
       <div class="mf-row">
         <p class="mf-word" aria-hidden="true"><span>FRAMED</span>
@@ -168,7 +168,7 @@
       <div class="wheel-stage" id="wheelStage" tabindex="0" role="listbox" aria-label="What we shoot. Use the arrow keys to turn.">
         <div class="wheel-rot" id="wheelRot"></div>
       </div>
-      <div class="wheel-label" id="wheelLabel" aria-hidden="true">What we shoot</div>
+      <div class="wheel-label" id="wheelLabel" aria-hidden="true" data-cms="wheel.label">What we shoot</div>
       <div class="wheel-title" id="wheelTitle" aria-live="polite">
         <div class="wt-count" id="wtCount"></div>
         <h2 id="wtName">Weddings</h2>
@@ -179,7 +179,7 @@
         </a>
       </div>
       <ol class="wheel-index" id="wheelIndex"></ol>
-      <p class="wheel-hint" id="wheelHint">Keep scrolling to turn the wheel</p>
+      <p class="wheel-hint" id="wheelHint" data-cms="wheel.hint">Keep scrolling to turn the wheel</p>
     </div>
   </section>
 
@@ -187,11 +187,11 @@
   <section class="about" id="about" data-tone="light">
     <div class="about-in">
       <div class="about-head">
-        <h2>We'd rather photograph your grandmother's face than the stage decor.</h2>
-        <p>Vistaar Content is a photography and film team for the occasions families plan for months: weddings, traditional ceremonies, first birthdays, housewarmings and more. We plan every shoot around your rituals and your people, so the moments that matter to you are covered while everyone else is busy.</p>
+        <h2 data-cms="about.title">We'd rather photograph your grandmother's face than the stage decor.</h2>
+        <p data-cms="about.text">Vistaar Content is a photography and film team for the occasions families plan for months: weddings, traditional ceremonies, first birthdays, housewarmings and more. We plan every shoot around your rituals and your people, so the moments that matter to you are covered while everyone else is busy.</p>
       </div>
       <ol class="ig" id="ig" aria-label="How a shoot with us works"></ol>
-      <p class="ig-hint">Hover over a photo or a step to bring it into focus.</p>
+      <p class="ig-hint" data-cms="about.hint">Hover over a photo or a step to bring it into focus.</p>
     </div>
   </section>
 
@@ -211,10 +211,10 @@
       <canvas id="tmFrost" aria-hidden="true"></canvas>
       <span class="tm-shade" aria-hidden="true"></span>
       <div class="tm-head">
-        <h2 id="tmHead">The people behind the camera</h2>
-        <p>The faces you'll see on your day: photographers and filmmakers who work as one crew.</p>
+        <h2 id="tmHead" data-cms="team.title">The people behind the camera</h2>
+        <p data-cms="team.text">The faces you'll see on your day: photographers and filmmakers who work as one crew.</p>
       </div>
-      <span class="tm-hint" id="tmHint">Move across the photo to clear the frost</span>
+      <span class="tm-hint" id="tmHint" data-cms="team.hint">Move across the photo to clear the frost</span>
     </div>
   </section>
 
@@ -225,11 +225,11 @@
           <div class="mx-mask v"></div><div class="mx-mask h"></div>
           <div class="mx-grid" id="mxGrid"></div>
         </div>
-        <div class="mx-title" id="mxTitle" aria-hidden="true"><p class="mx-big">Recent work</p><p>Keep scrolling. Tap any photo to open it.</p></div>
+        <div class="mx-title" id="mxTitle" aria-hidden="true"><p class="mx-big" data-cms="recent.bigTitle">Recent work</p><p data-cms="recent.bigText">Keep scrolling. Tap any photo to open it.</p></div>
         <div class="mx-ui" id="mxUi">
           <div class="mx-ui-in">
             <div class="work-head">
-              <h2 id="mxHead">Recent work</h2>
+              <h2 id="mxHead" data-cms="recent.title">Recent work</h2>
               <div class="tabs" role="tablist" aria-label="Portfolio type">
                 <button class="tab" role="tab" id="tab-photo" aria-controls="mxGrid" aria-selected="true">Photography</button>
                 <button class="tab" role="tab" id="tab-film" aria-controls="mxGrid" aria-selected="false" tabindex="-1">Films &amp; Videos</button>
@@ -264,8 +264,8 @@
     </svg>
     <div class="fl-in">
       <div class="fl-head">
-        <h2 id="flHead">Films &amp; reels</h2>
-        <p>Event highlights and short reels. Hover to preview, click to watch with sound.</p>
+        <h2 id="flHead" data-cms="films.title">Films &amp; reels</h2>
+        <p data-cms="films.text">Event highlights and short reels. Hover to preview, click to watch with sound.</p>
       </div>
       <div class="mk-panel">
         <div class="mk-grid" id="mkGrid"></div>
@@ -283,8 +283,8 @@
   <section class="enquire" id="enquire" data-tone="light">
     <div class="enq-in">
       <div class="enq-side">
-        <h2>Tell us about the day.</h2>
-        <p>Share a few details and we'll reply on WhatsApp to confirm availability for your date.</p>
+        <h2 data-cms="enquire.title">Tell us about the day.</h2>
+        <p data-cms="enquire.text">Share a few details and we'll reply on WhatsApp to confirm availability for your date.</p>
         <p id="enqAlt"></p>
       </div>
       <form class="form" id="enqForm" novalidate>
@@ -305,8 +305,8 @@
   <!-- GALLERY: polaroid-line-carousel -->
   <section class="gallery" id="gallery" data-tone="light" aria-labelledby="plHead">
     <div class="pl-head">
-      <h2 id="plHead">Fresh from the darkroom</h2>
-      <p>A few favourite frames, pegged up to dry. Drag the line, use the arrows, or tap a print.</p>
+      <h2 id="plHead" data-cms="gallery.title">Fresh from the darkroom</h2>
+      <p data-cms="gallery.text">A few favourite frames, pegged up to dry. Drag the line, use the arrows, or tap a print.</p>
     </div>
     <div class="pl-root" id="plRoot" role="region" aria-roledescription="carousel" aria-label="Favourite photographs" tabindex="0">
       <svg class="pl-string" aria-hidden="true"><path id="plPath" fill="none" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -327,7 +327,7 @@
     <div class="foot-grid">
       <div>
         <a class="brand" href="#top">Vistaar Content</a>
-        <p class="foot-tag">Photography and films for weddings, traditional ceremonies and family occasions.</p>
+        <p class="foot-tag" data-cms="footer.tag">Photography and films for weddings, traditional ceremonies and family occasions.</p>
         <form class="foot-quick" id="footQuick">
           <input type="date" id="fqDate" aria-label="Your event date">
           <button class="btn btn-solid" type="submit">Check date</button>
@@ -341,7 +341,7 @@
     </div>
     <div class="foot-base">
       <span>© <span id="yr"></span> Vistaar Content</span>
-      <span class="foot-dot"><i></i>Weddings, ceremonies and family occasions</span>
+      <span class="foot-dot"><i></i><span data-cms="footer.strip">Weddings, ceremonies and family occasions</span></span>
       <a href="#top">Back to top</a>
     </div>
   </div>
@@ -364,8 +364,8 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="js/content.js?v=2026-10-08f" defer></script>
-<script src="js/common.js?v=2026-10-08f" defer></script>
-<script src="js/app.js?v=2026-10-08f" defer></script>
+<script src="js/content.js?v=2026-10-27a" defer></script>
+<script src="js/cms-config.js?v=2026-10-27a" defer></script>
+<script src="js/cms.js?v=2026-10-27a" data-next="js/common.js?v=2026-10-27a js/app.js?v=2026-10-27a" defer></script>
 </body>
 </html>

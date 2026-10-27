@@ -6,8 +6,15 @@
   "scripts": {
     "dev": "npx --yes serve . -l 3000",
     "start": "npx --yes serve . -l 3000",
-    "check": "node tools/check-config.mjs"
+    "check": "node tools/check-config.mjs",
+    "seed": "node tools/seed-supabase.mjs",
+    "admin": "node tools/make-admin.mjs"
   },
-  "keywords": ["photography", "wedding", "films", "static-site"],
+  "keywords": [
+    "photography",
+    "wedding",
+    "films",
+    "static-site"
+  ],
   "license": "UNLICENSED"
 }

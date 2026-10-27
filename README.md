@@ -56,6 +56,33 @@ For everyday changes you only ever need to edit **`js/content.js`**.
 
 ---
 
+## Editing content (CMS)
+
+The site's text, photos, films and contact details are edited in the browser at
+**`/admin`** (locally: http://localhost:3000/admin). Content lives in Supabase;
+`js/content.js` is only the fallback used if Supabase can't be reached.
+
+- **Home page**: every section in order (hero text and photo cards, about and
+  its steps and prints, team photo, polaroid gallery, footer...).
+- **Category pages**: one per occasion: name, cover, heading, photos and films.
+  New categories start hidden.
+- **Contact & social**: WhatsApp number, phone, email, social links.
+- **Enquiries**: everything sent through the enquiry form, with a status.
+
+Saves are live on the next page load. Text left empty falls back to what's in the HTML.
+
+Give someone editor access (needs `.env` with the service role key):
+
+```bash
+npm run admin -- you@example.com                # creates the login, prints a password
+npm run admin -- you@example.com "NewPassword"  # sets a password
+npm run admin -- you@example.com --remove       # takes access away
+```
+
+One-time setup, already done for this project: run `supabase/schema.sql` in the
+Supabase SQL Editor, then `npm run seed` to copy `js/content.js` into the database.
+Supabase settings for the site are in `js/cms-config.js` (public URL and anon key only).
+
 ## Before going live
 
 Run the checker at any time to see what is still outstanding:
