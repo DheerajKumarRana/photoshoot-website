@@ -40,12 +40,13 @@ async function run(fn,msg="Saved"){
 /* ---------- Sign in ---------- */
 function showLogin(msg=""){$("#app").hidden=true;$("#login").hidden=false;$("#lgMsg").textContent=msg}
 $("#loginForm").addEventListener("submit",async e=>{
-  e.preventDefault();const btn=$("#lgBtn");btn.disabled=true;$("#lgMsg").textContent="";
+  e.preventDefault();const btn=$("#lgBtn");btn.disabled=true;btn.textContent="Signing in…";$("#lgMsg").textContent="";
   const{error}=await sb.auth.signInWithPassword({email:$("#lgEmail").value.trim(),password:$("#lgPass").value});
-  btn.disabled=false;
+  btn.disabled=false;btn.textContent="Sign in";
   if(error)return showLogin(error.message==="Invalid login credentials"?"That email and password don't match.":error.message);
   start();
 });
+$("#lgPeek").addEventListener("click",e=>{const p=$("#lgPass"),show=p.type==="password";p.type=show?"text":"password";e.target.textContent=show?"Hide":"Show"});
 $("#signOut").addEventListener("click",async()=>{await sb.auth.signOut();location.hash="";location.reload()});
 
 async function start(){
@@ -56,7 +57,7 @@ async function start(){
     await sb.auth.signOut();
     return showLogin(`${session.user.email} can sign in but isn't an editor. On your computer, run: npm run admin -- ${session.user.email}`);
   }
-  $("#who").textContent=session.user.email;
+  $("#who").textContent=session.user.email;$("#avatar").textContent=session.user.email[0].toUpperCase();
   try{await loadAll()}catch(e){return showLogin("Couldn't load the content: "+e.message)}
   $("#login").hidden=true;$("#app").hidden=false;
   route();
@@ -87,13 +88,26 @@ $("#menu").addEventListener("click",()=>side.classList.add("open"));
 $("#sideClose").addEventListener("click",()=>side.classList.remove("open"));
 addEventListener("hashchange",()=>{if(!$("#app").hidden)route()});
 
+const ICON={
+  home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  phone:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+  inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/>'
+};
+const icon=name=>{const s=document.createElementNS("http://www.w3.org/2000/svg","svg");s.setAttribute("viewBox","0 0 24 24");s.innerHTML=ICON[name];return s};
 function renderNav(){
   const cur=location.hash||"#home",nNew=S.enq.filter(e=>e.status==="new").length;
-  const items=[["#home","Home page"],["#cats","Category pages"],
-    ...S.cats.map(c=>[`#cat/${c.id}`,c.title,"sub",!c.published]),
-    ["#contact","Contact & social"],["#enquiries","Enquiries",null,false,nNew]];
-  $("#sideNav").replaceChildren(...items.map(([href,label,cls,hidden,badge])=>
-    h("a",{href,class:[cls,cur===href?"on":""].filter(Boolean).join(" ")},h("span",{},label),hidden&&h("em",{},"hidden"),badge>0&&h("b",{},badge))));
+  const link=(href,label,{ic,img,hidden,badge}={})=>h("a",{href,class:[img!==undefined?"sub":"",cur===href?"on":""].filter(Boolean).join(" ")},
+    ic&&icon(ic),img!==undefined&&h("span",{class:"dot",style:img?`background-image:url("${img}")`:null}),
+    h("span",{class:"lbl"},label),hidden&&h("em",{},"Hidden"),badge>0&&h("b",{},badge));
+  $("#sideNav").replaceChildren(
+    h("p",{class:"grp"},"Website"),
+    link("#home","Home page",{ic:"home"}),
+    link("#cats","Category pages",{ic:"grid"}),
+    ...S.cats.slice().sort((a,b)=>a.sort-b.sort).map(c=>link(`#cat/${c.id}`,c.title,{img:US(c.src||c.img,80),hidden:!c.published})),
+    h("p",{class:"grp"},"Business"),
+    link("#contact","Contact & social",{ic:"phone"}),
+    link("#enquiries","Enquiries",{ic:"inbox",badge:nNew}));
 }
 function route(){
   const[r,arg]=(location.hash||"#home").slice(1).split("/");
@@ -104,14 +118,15 @@ function route(){
   else if(r==="enquiries")pageEnq();
   else pageHome();
 }
-function head(crumb,title,view){
+function head(crumb,title,view,status){
   $("#crumb").textContent=crumb;$("#pageTitle").textContent=title;document.title=`${title} · Vistaar CMS`;
   const a=$("#viewPage");a.hidden=!view;if(view)a.href=view;
+  const st=$("#status");st.hidden=!status;if(status){st.textContent=status==="live"?"Live":"Hidden";st.className="pill "+status}
 }
 const add=(...els)=>$("#view").append(...els);
 
 /* ---------- Small building blocks ---------- */
-const card=(title,hint,...body)=>h("section",{class:"card"},h("div",{class:"card-h"},h("h2",{},title),hint&&h("p",{},hint)),...body);
+const card=(title,hint,...body)=>h("section",{class:"card"},h("div",{class:"card-h"},h("h2",{},title),hint&&h("p",{},hint)),h("div",{class:"card-b"},...body));
 const field=(label,input,help)=>h("label",{class:"fld"},h("span",{class:"fld-l"},label),input,help&&h("small",{},help));
 function inp(value,rows){const el=rows?h("textarea",{rows}):h("input",{type:"text"});el.value=value??"";return el}
 const thumb=v=>v?US(v,480):"";
@@ -242,7 +257,7 @@ const lastSort=L=>L.length?Math.max(...L.map(r=>r.sort))+1:0;
    HOME PAGE — one card per section, top to bottom as on the site.
    ===================================================================== */
 function pageHome(){
-  head("Page","Home page","index.html");
+  head("Website","Home page","index.html","live");
   const hero=S.set.hero||HERO.map(([cat,img])=>({cat,img}));
   const steps=S.set.steps||STEPS.map(([title,text])=>({title,text}));
   const team=S.set.team||TEAM;
@@ -314,7 +329,7 @@ function galleryEditor(){
    CATEGORY PAGES
    ===================================================================== */
 function pageCats(){
-  head("Pages","Category pages",null);
+  head("Website","Category pages",null);
   const list=h("div",{class:"cat-list"});
   const draw=()=>{
     const L=S.cats.slice().sort((a,b)=>a.sort-b.sort);
@@ -349,7 +364,7 @@ function pageCats(){
 
 function pageCat(id){
   const c=S.cats.find(x=>x.id===id);
-  head("Category page",c.title,`category.html#${encodeURIComponent(c.id)}`);
+  head("Website / Category pages",c.title,`category.html#${encodeURIComponent(c.id)}`,c.published?"live":"hidden");
   add(basicsCard(c),photosCard(c),filmsCard(c));
 }
 
@@ -368,7 +383,7 @@ function basicsCard(c){
     if(!patch.title)throw new Error("The category needs a name.");
     if(cover){if(c.src!==cover)dropFile(c.src);patch.src=cover}
     await q(sb.from("categories").update(patch).eq("id",c.id));Object.assign(c,patch);
-    renderNav();head("Category page",c.title,`category.html#${encodeURIComponent(c.id)}`);
+    renderNav();head("Website / Category pages",c.title,`category.html#${encodeURIComponent(c.id)}`,c.published?"live":"hidden");
   });
   const box=h("div",{},
     h("div",{class:"row2"},
@@ -438,7 +453,7 @@ function filmsCard(c){
    CONTACT & SOCIAL
    ===================================================================== */
 function pageContact(){
-  head("Settings","Contact & social","index.html#enquire");
+  head("Business","Contact & social","index.html#enquire");
   const v={...CONFIG,...(S.set.contact||{})},f={};
   const mk=(k,label,help,ph)=>{f[k]=inp(v[k]);if(ph)f[k].placeholder=ph;return field(label,f[k],help)};
   const btn=saveBtn("Save contact details",async()=>{
@@ -466,7 +481,7 @@ function pageContact(){
    ===================================================================== */
 const STATUS={new:"New",contacted:"Contacted",booked:"Booked",closed:"Closed"};
 function pageEnq(){
-  head("Inbox","Enquiries",null);
+  head("Business","Enquiries",null);
   const list=h("div",{class:"enq-list"});
   let filter="open";
   const filters=h("div",{class:"seg"});
